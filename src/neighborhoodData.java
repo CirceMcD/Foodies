@@ -5,12 +5,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class neighborhoodData {
-	//Set file path to Excel Workbook of interest. 
-    public static final String XLSX_FILE_PATH = "DataDownload.xls";
-    
+
     //METHOD: Read the excel file as a workbook object. 
-    public Workbook readWorkbook() throws EncryptedDocumentException, IOException {
-        Workbook workbook = WorkbookFactory.create(new File(XLSX_FILE_PATH));
+    public Workbook readWorkbook(String filePath) throws EncryptedDocumentException, IOException {
+        Workbook workbook = WorkbookFactory.create(new File(filePath));
     	return workbook;
     }
     
@@ -18,7 +16,6 @@ public class neighborhoodData {
     public void printSheet(Sheet sheet){
         // Create a DataFormatter to format and get each cell's value as String
         DataFormatter dataFormatter = new DataFormatter();
-       
         //Print out rows and columns using forEach.
         sheet.forEach(row -> {
             row.forEach(cell -> {

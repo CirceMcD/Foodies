@@ -27,5 +27,6 @@
 	<classpathentry kind="lib" path="C:/Users/Circe/eclipse-workspace/Foodies/math/commons-math3-3.6.1-tests.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Circe/eclipse-workspace/Foodies/math/commons-math3-3.6.1-test-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Circe/eclipse-workspace/Foodies/math/commons-math3-3.6.1-tools.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
