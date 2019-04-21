@@ -8,7 +8,15 @@ Food environment is a major factor in public health. Characteristics of the food
 
 Create a user-friendly model that will predict health outcomes based on food environments and socio-economic factors. The model will include an interactive map with data representing each state in the country. Variables include but are not limited to Socioeconomic characteristics, access proximity to grocery stores, food and nutrition assistance, health and physical activity, food insecurity, grocery store availability, food prices and taxes, prevalence of heart disease, diabetes and infant mortality rates.
 
-## Proposed Methods And Classes
+## Proposed Classes (Associated Methods): 
+County
+State
+Workbook (readWorkbook, printSheet, printSheetNames) 
+DescriptiveStatistics (mean, median, standard deviation) 
+Analysis (t-test, correlation) 
+Visualization (map, corrlation chart)
+
+Please see CRCCards.docx for more details on brainstorming. 
 
 ## Notes On Current State
 
