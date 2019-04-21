@@ -1,4 +1,5 @@
 # Foodies
+
 ## Project Idea:
 
 Food environment is a major factor in public health. Characteristics of the food landscape, such as store/restaurant proximity, food prices, and food and nutrition assistance programs, are starting to be systematically captured. The USDA publishes a detailed dataset in Excel format called the Food Environmental Atlas. This project proposes exploring this data for trends between food environments, socio-economic factors and health outcomes.
@@ -6,6 +7,31 @@ Food environment is a major factor in public health. Characteristics of the food
 ## Project Goals:
 
 Create a user-friendly model that will predict health outcomes based on food environments and socio-economic factors. The model will include an interactive map with data representing each state in the country. Variables include but are not limited to Socioeconomic characteristics, access proximity to grocery stores, food and nutrition assistance, health and physical activity, food insecurity, grocery store availability, food prices and taxes, prevalence of heart disease, diabetes and infant mortality rates.
+
+## Proposed Methods And Classes
+
+## Notes On Current State
+
+Note that the reading of the file into java was done two ways.
+
+Circe implemented using the Apache POI library to read in the file. This approach seeks to decrease the amount of hard coding needed to read in files and should be able to capture the entire dataset. Code currently works for test cases, but needs to be improved to fully loop. Once looping is complete, it will be integrated with Gina's solution below. 
+
+descriptiveStatistics.java
+neighborhoodData.java
+
+Gina implemented using the variable by variable read in method perviously demonstrated to the class. This code currently functions ok however is limited in scope and does not capture the entire dataset provided by the FDA. Related files: 
+
+CompareRunner.java
+CompareTopRanked.java
+DeathCode.java	fixed
+DeathCodeReader.java
+DeathCodeRunner.javao
+FoodIndex.java
+FoodReader.java
+HealthIndex.java
+HealthReader.java
+Health_Statistic.java
+Sum_DeathCode.java
 
 ## Task Table:
 
