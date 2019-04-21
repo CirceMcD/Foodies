@@ -1,5 +1,3 @@
-package FoodEnvironmentData;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -7,8 +5,7 @@ import java.util.Scanner;
 
 public class FoodReader {
 
-	
-	public ArrayList<HealthIndex> readFood(String filename) throws FileNotFoundException {
+	public ArrayList<FoodIndex> readFood(String filename) throws FileNotFoundException {
 
 		ArrayList<FoodIndex> FoodData = new ArrayList<>();
 
@@ -21,51 +18,24 @@ public class FoodReader {
 
 		while (scanner.hasNextLine()) {
 
-			String healthRow = scanner.nextLine();
-			String[] healthRowData = healthRow.split(",");
+			String foodRow = scanner.nextLine();
+			String[] foodRowData = foodRow.split(",");
 
 			/*
 			 * Take the value corresponding to each Datum and save as Array In this step,
 			 * all data called as String to handle empty one.
 			 */
-			String state;
-			
-			String lowAccess_over_10_15;
-			String lowAccess_hh_10_15;
-			
-			String grocery_09_14;
-			String superCenter_09_14;
-			
-			String fastFood_09_14;
-			String fullService_09_14;
-			
-			
-			String countyCode=healthRowData[0];
-			String state=healthRowData[1];
-			String countyName=healthRowData[2];
-			String diabetesRate2008=healthRowData[3];
-			String diabetesRate2013=healthRowData[4];
-			String obesityRate2008=healthRowData[5];
-			String obesityRate2013=healthRowData[6];
-			String highSchoolPhyAct2015=healthRowData[7];
-			String fitnessFac2009=healthRowData[8];
-			String fitnessFac2014=healthRowData[9];
-			String fitnessFac2009_2014=healthRowData[10];
-			String fitnessFac2009_pop=healthRowData[11];
-			String fitnessFac2014_pop=healthRowData[12];
-			String fitnessFac2009_2014_pop=healthRowData[13];
-			
+			String state = foodRowData[0]; 
+			String lowAccess_over_10_15 = foodRowData[1];
+			String lowAccess_hh_10_15 = foodRowData[2];
+			String grocery_09_14 = foodRowData[3];
+			String superCenter_09_14 = foodRowData[4];
+			String fastFood_09_14 = foodRowData[5];
+			String fullService_09_14 = foodRowData[6];
 
-			HealthIndex healthIndex = new HealthIndex(countyCode,  state,  countyName,  diabetesRate2008,
-					 diabetesRate2013,  obesityRate2008,  obesityRate2013,  highSchoolPhyAct2015,
-					 fitnessFac2009,  fitnessFac2014,  fitnessFac2009_2014,  fitnessFac2009_pop,
-					 fitnessFac2014_pop,  fitnessFac2009_2014_pop);
-
-			HealthData.add(healthIndex);
+			FoodIndex foodIndex = new FoodIndex(state, lowAccess_over_10_15, lowAccess_hh_10_15, grocery_09_14, superCenter_09_14, fastFood_09_14, fullService_09_14);
+			FoodData.add(foodIndex);
 		}
-
-		return HealthData;
-
+		return FoodData;
 	}
-
 }

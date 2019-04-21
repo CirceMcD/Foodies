@@ -1,5 +1,3 @@
-package NCHS_death;
-
 public class DeathCode {
 		
 		/*

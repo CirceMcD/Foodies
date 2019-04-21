@@ -1,5 +1,3 @@
-package FoodEnvironmentData;
-
 public class FoodIndex {
 	/*
 	 * column required 

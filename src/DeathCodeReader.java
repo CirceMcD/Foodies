@@ -1,13 +1,9 @@
-package NCHS_death;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DeathCodeReader {
-
-
 	/**
 	 * This class read FiveLeadingCasuseOfDeath data and organize the statistic values in each State.
 	 * @param filename

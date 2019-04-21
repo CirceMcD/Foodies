@@ -1,14 +1,8 @@
-package FoodEnvironmentData;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
-
 public class CompareTopRanked {
-
-	
 	// Sort top 10 ranked state
-	
 	/**
 	 * 
 	 * @param oneGroup
@@ -16,11 +10,8 @@ public class CompareTopRanked {
 	 */
 	
 	public HashMap<String, Double> topRankedState (HashMap<String, Double> inputMap) {
-	
 		// sort by value  
-			
 		HashMap<String, Double> sortedInput =new HashMap<>();
-		
 		sortedInput = inputMap.entrySet().stream()
 	    .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
 	    .limit(10)
@@ -55,28 +46,13 @@ public class CompareTopRanked {
 	 * @return
 	 */
 	public ArrayList <String> commonTopRankedState (HashMap<String, Double> oneGroup, HashMap<String, Double> anotherGroup) {
-	
-	// Array top 10 numbered state in one (Health) group and another Group
-	
+		// Array top 10 numbered state in one (Health) group and another Group
 		ArrayList<String> commonState= new ArrayList<>();
-		
-		
 		for (String key: oneGroup.keySet()) {
-			
 			if(anotherGroup.keySet().contains(key)){
-				
 				commonState.add(key);
-			}
-			
+			}	
 		}
-		
 		return commonState;
 	}
-	
-	
-	
-	
-	
-		
-	
 }

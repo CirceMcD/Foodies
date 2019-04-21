@@ -1,14 +1,9 @@
-package NCHS_death;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import FoodEnvironmentData.CompareTopRanked;
-
 public class DeathCodeRunner {
-	
 		
 	public static void main(String[] args) {
-			
 			DeathCodeReader dcr=new DeathCodeReader();
 			Sum_DeathCode sumD=new Sum_DeathCode();
 			CompareTopRanked ctr= new CompareTopRanked();
@@ -41,9 +36,7 @@ public class DeathCodeRunner {
 			
 	} catch (Exception e) {
 		// TODO: handle exception
-		e.printStackTrace();
-		
+		e.printStackTrace();	
 	}
 	}
-		
-	}
+}
