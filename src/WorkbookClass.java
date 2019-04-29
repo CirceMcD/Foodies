@@ -3,11 +3,12 @@ import org.apache.poi.ss.usermodel.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class WorkbookClass {
 
     //METHOD: Read the excel file as a workbook object. 
-    public Workbook readWorkbook(String filePath) throws EncryptedDocumentException, IOException {
+    public static Workbook readWorkbook(String filePath) throws EncryptedDocumentException, IOException {
         Workbook workbook = WorkbookFactory.create(new File(filePath));
     	return workbook;
     }
@@ -31,6 +32,9 @@ public class WorkbookClass {
         workbook.forEach(sheet -> {
             System.out.println("=> " + sheet.getSheetName());
         });
+        
+    public ArrayList<Sheet> listInformativeSheets(Sheet testSheet){
+    	//TODO: See if first columns are FIPS/County/State
     }
 }
 
