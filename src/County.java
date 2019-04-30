@@ -6,10 +6,10 @@ public class County {
 	String State;
 	String FIPS; 
 	String County; 
-	Map<String, Integer> stats;
+	Map<String, Double> stats;
 
 //Files will need to be iterated through to add each county. 
-	public County(String State, String FIPS, String County) {
+	public County(String FIPS, String State, String County) {
 		this.State = State;
 		this.FIPS = FIPS; 
 		this.County = County;

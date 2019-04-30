@@ -5,24 +5,16 @@ import org.apache.poi.ss.usermodel.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class descriptiveStatistics {
-//	
-//	public Map<String, Integer> countRowParser(int RowNum, int ColNum){
-//		
-//		
-//	}
-//	
 	public static void main(String[] args) throws EncryptedDocumentException, IOException {
-		Workbook workbook = WorkbookClass.readWorkbook("DataDownload.xls");
-		Sheet currentSheet = workbook.getSheet("ACCESS");
-		DescriptiveStatistics stats = new DescriptiveStatistics();
-		System.out.println(currentSheet.getRow(0).getCell(0).getStringCellValue());
-		for (int i=1; i<currentSheet.getPhysicalNumberOfRows();i++) {
-			Double number = Double.parseDouble(currentSheet.getRow(i).getCell(0).getStringCellValue());
-			stats.addValue(number);
-		}
-		double mean = stats.getMean();
-		System.out.println(mean);
+		WorkbookClass workbook = new WorkbookClass("DataDownload.xls");
+		ArrayList<Sheet> dataSheets = workbook.listDataSheets();
+		dataSheets.forEach(sheet ->{
+		        System.out.println(sheet);
+		    }); 
+		Map<String, County> counties = workbook.countyCreator();
+		System.out.println(counties.get("56045").stats.keySet());
 	}
 }
