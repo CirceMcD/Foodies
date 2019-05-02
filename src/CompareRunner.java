@@ -10,7 +10,7 @@ public static void main(String[] args) {
 		CompareTopRanked ctr= new CompareTopRanked();
 		
 		try {
-			ArrayList<HealthIndex> result= hr.readHealth("health.csv");
+			ArrayList<HealthIndex> result= hr.readHealth("DataDownload.xls");
 			HashMap<String, Double> average1=hs.ComputeStatistic_diabetesRateChange(result);
 			HashMap<String, Double> average2=hs.ComputeStatistic_obesityRateChange(result);
 			HashMap<String, Double> average3=hs.ComputeStatistic_RecFac_09_14(result);
