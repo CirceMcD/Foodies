@@ -1,17 +1,16 @@
 //This will hold all the related counties.
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
+
 public class State {
 	String State; 
-	ArrayList<County> Counties;
-	Map<String, Integer> stats;
+	Map<String, DescriptiveStatistics> stats;
 	
-	public State(String State, ArrayList<County> Counties ) {
+	public State(String State) {
 		this.State = State;
-		this.Counties = Counties;
-		//State specific states will need to be agregated using HashMap key from all county stats. 
+		//State specific states will need to be aggregated using HashMap key from all county stats. 
 		this.stats = new HashMap<>();
 	}
 }
