@@ -1,3 +1,4 @@
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.poi.EncryptedDocumentException;
 
 import org.apache.poi.ss.usermodel.*;
@@ -74,6 +75,45 @@ public class WorkbookClass {
     		}
     	});
      return counties;
+    }
+    
+    //Method: Aggregates states together 
+    public Map<String, State> stateCreator(Map<String,County> counties){
+    	ArrayList<String> statesNames = listStates(counties);
+    	Map<String, State> states = new HashMap<String, State>();
+    	//Initialize relevant variables.
+    	String[] statistics = counties.entrySet().stream().findAny().get().getValue().stats.keySet().toArray(new String[counties.entrySet().stream().findAny().get().getValue().stats.size()]);
+    	//For each statistic, create empty descriptive statistics object.
+    	State tempState;
+    	for(String state : statesNames) {
+    		tempState = new State(state);
+    		states.put(state, tempState);
+    		for(String stat :statistics) {
+				DescriptiveStatistics tempDStats = new DescriptiveStatistics();
+	    		//Create new state class object.
+	    		counties.entrySet().stream().forEach(county -> {
+	    			if (county.getValue().State.toString().equalsIgnoreCase(state)) {
+	    				Double tempVal = county.getValue().stats.get(stat).doubleValue();
+	    				tempDStats.addValue(tempVal);
+	    			}
+	    		
+	    		});
+	    		tempState.stats.put(stat, tempDStats);
+	    	}
+    	}
+    	return states;
+    }
+    
+    public ArrayList<String> listStates(Map<String,County> counties){
+    	ArrayList<String> stateNameList = new ArrayList<String>();
+    	counties.entrySet().stream().forEach(county -> {
+    		String tempState = county.getValue().State.toString();
+    		if (!stateNameList.contains(tempState)) {
+    			stateNameList.add(tempState);
+    			}
+    		}
+    	);
+    	return stateNameList;
     }
 
     public Boolean isDataSheet(Sheet sheet){
