@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-//The county class is intended to hold country specific information and 
+//The county class is intended to hold county specific information and 
 public class County {
 	String State;
 	String FIPS; 

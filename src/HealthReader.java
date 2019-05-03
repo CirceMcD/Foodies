@@ -1,4 +1,5 @@
 import java.io.File;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,6 +9,10 @@ import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+<<<<<<< HEAD
+=======
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+>>>>>>> GJ
 
 /**
  * This class read Health data and organize the statistic values in each State. 
@@ -21,8 +26,13 @@ public class HealthReader {
 	public ArrayList<HealthIndex> readHealth(String filename) throws EncryptedDocumentException, IOException {
 
 		
+<<<<<<< HEAD
 		neighborhoodData data = new neighborhoodData();
 		Workbook workbook = data.readWorkbook(filename);
+=======
+		WorkbookClass workbook = new WorkbookClass(filename);
+		
+>>>>>>> GJ
 		Sheet currentSheet = workbook.getSheet("HEALTH");
 
 		//	DescriptiveStatistics stats = new DescriptiveStatistics();
