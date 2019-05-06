@@ -1,15 +1,15 @@
 import java.util.HashMap;
 import java.util.Map;
 
-//The county class is intended to hold country specific information and 
+//The county class is intended to hold county specific information and 
 public class County {
 	String State;
 	String FIPS; 
 	String County; 
-	Map<String, Integer> stats;
+	Map<String, Double> stats;
 
 //Files will need to be iterated through to add each county. 
-	public County(String State, String FIPS, String County) {
+	public County(String FIPS, String State, String County) {
 		this.State = State;
 		this.FIPS = FIPS; 
 		this.County = County;

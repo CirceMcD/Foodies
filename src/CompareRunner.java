@@ -1,48 +1,34 @@
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CompareRunner {
 	
-public static void main(String[] args) {
-		
-		HealthReader hr=new HealthReader();
-		Health_Statistic hs=new Health_Statistic();
-		CompareTopRanked ctr= new CompareTopRanked();
-		
-		try {
-			ArrayList<HealthIndex> result= hr.readHealth("DataDownload.xls");
-			HashMap<String, Double> average1=hs.ComputeStatistic_diabetesRateChange(result);
-			HashMap<String, Double> average2=hs.ComputeStatistic_obesityRateChange(result);
-			HashMap<String, Double> average3=hs.ComputeStatistic_RecFac_09_14(result);
-		
-		
-			System.out.println(average1);
-			System.out.println(average2);
-			System.out.println(average3);
+	public static void main(String[] args) {
 			
-			
-		HashMap<String, Double>  map1= ctr.topRankedState(average1);
-		HashMap<String, Double>  map2= ctr.topRankedState(average2);
-		HashMap<String, Double>  map3= ctr.topRankedState(average3);
+		CompareTopRanked ctr=new CompareTopRanked("DataDownload.xls");
 		
-		HashMap<String, Double>  map11= ctr.bottomRankedState(average1);
-		HashMap<String, Double>  map22= ctr.bottomRankedState(average2);
-		HashMap<String, Double>  map33= ctr.bottomRankedState(average3);
+		
+		//hashMap diabetes difference between 2013-2008
+		HashMap <String, Double> diabetesRateChange= ctr.computeDifference("PCT_DIABETES_ADULTS13", "PCT_DIABETES_ADULTS08");
+		HashMap <String, Double> obeseRateChange=ctr.computeDifference("PCT_OBESE_ADULTS13", "PCT_OBESE_ADULTS08");
+		HashMap <String, Double> farmersRateChange =ctr.getValuesForVariable("PCH_FMRKTPTH_09_16");
+		
+		HashMap<String, Double>  map1= ctr.topRankedState(diabetesRateChange);
+		HashMap<String, Double>  map2= ctr.topRankedState(obeseRateChange);
+		HashMap<String, Double>  map3= ctr.topRankedState(farmersRateChange);
+		
+		System.out.println(map1);
+		
+		System.out.println(map2);
+		System.out.println(map3);
 //		
-//		System.out.println(map1);
-//		System.out.println(map11);
-		
-		
-		System.out.println("Common States for topRanked diabetes and obesity  :"+ ctr.commonTopRankedState(map1, map2));
-		System.out.println("Common States for topRanked obesity and recreation Facility   :"+ ctr.commonTopRankedState(map2, map33));
-		System.out.println("Common States for topRanked diabetes and recreation Facility   :"+ ctr.commonTopRankedState(map1, map33));
-		
-		
-} catch (Exception e) {
-	// TODO: handle exception
-	e.printStackTrace();
+//		System.out.println("Common States for topRanked diabetes and obesity  :"+ ctr.commonTopRankedState(map1, map2));
+//		System.out.println("Common States for topRanked obesity and farmersMarketSale   :"+ ctr.commonTopRankedState(map2, map3));
+//		System.out.println("Common States for topRanked diabetes and farmersMarketSale   :"+ ctr.commonTopRankedState(map1, map3));
+//		
+	
+} 
 	
 }
-}
+
 	
-}
+
