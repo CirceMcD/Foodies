@@ -1,51 +1,71 @@
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
+
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.jupiter.api.Test;
 
-class WorkBookClassTest {
-
-	//Created test workbook.
-	//TODO: Is this useful or should it be removed? 
-	public Workbook createTestWorkbook() throws EncryptedDocumentException, IOException {
-    	//All of this creates a java workbook which should mirror the given test workbook.
-    	String[] columns = {"State", "County", "Data"};
-    	Workbook testworkbook = new XSSFWorkbook();
-    	Sheet sheet1 = testworkbook.createSheet("Sheet1");
-    	Sheet sheet2 = testworkbook.createSheet("Sheet2");
-    	Row headerRow1 = sheet1.createRow(0);
-    	Row headerRow2 = sheet2.createRow(0);
-    	for(int i = 0; i < columns.length; i++) {
-            Cell cell = headerRow1.createCell(i);
-            cell.setCellValue(columns[i]);
-            cell = headerRow2.createCell(i);
-            cell.setCellValue(columns[i]);
-        }
-    	Row dataRow1 = sheet1.createRow(1); 
-    	dataRow1.createCell(0).setCellValue("CA");
-    	dataRow1.createCell(1).setCellValue("San Mateo");
-    	dataRow1.createCell(2).setCellValue("1");
-    	Row dataRow2 = sheet2.createRow(1); 
-    	dataRow2.createCell(0).setCellValue("NV");
-    	dataRow2.createCell(1).setCellValue("Clark");
-    	dataRow2.createCell(2).setCellValue("2");
-    	Row dataRow3 = sheet2.createRow(1); 
-    	dataRow3.createCell(0).setCellValue("CA");
-    	dataRow3.createCell(1).setCellValue("Santa Clara");
-    	dataRow3.createCell(2).setCellValue("3");
-    	
-    	return testworkbook;
-    }
-
-	//Test the reading on of small example file to see if cell/row arrangement is as expected.
+class WorkbookClassTest {
+	
 	@Test
-	public void testReadWorkbook() throws EncryptedDocumentException, IOException {
-		WorkbookClass n1 = new WorkbookClass();
-		Workbook importedWorkbook = n1.readWorkbook("test.xlsx");
-		assertEquals(1.0,importedWorkbook.getSheet("Sheet1").getRow(1).getCell(2).getNumericCellValue());
+	void testReadWorkbook() throws EncryptedDocumentException, IOException {
+		WorkbookClass n1 = new WorkbookClass("test.xlsx");
+		assertEquals(2.0,n1.myWorkbook.getSheet("Sheet1").getRow(1).getCell(3).getNumericCellValue());
 	}
 
+	@Test
+	void testCountyCreator() throws EncryptedDocumentException, IOException {
+		WorkbookClass n1 = new WorkbookClass("test.xlsx");
+		Map<String, County> counties = n1.countyCreator();
+		String statskeys = counties.get("101010").stats.keySet().toString();
+		assertEquals("[Data2, LastData, Data1]", statskeys);
+	}
+	
+	@Test
+	void testCountyCreator2() throws EncryptedDocumentException, IOException {
+		WorkbookClass n1 = new WorkbookClass("test.xlsx");
+		Map<String, County> counties = n1.countyCreator();
+		String statskeys = counties.get("123456").stats.keySet().toString();
+		assertEquals("[Data2, LastData, Data1]", statskeys);
+	}
+
+	@Test
+	void testStateCreator() throws EncryptedDocumentException, IOException {
+		WorkbookClass n1 = new WorkbookClass("test.xlsx");
+		Map<String, County> counties = n1.countyCreator();
+		Map<String, State> states = n1.stateCreator(counties);
+		assertEquals(1, states.get("NV").stats.get("Data2").getN());
+	}
+
+	@Test
+	void testListStates() throws EncryptedDocumentException, IOException {
+		WorkbookClass n1 = new WorkbookClass("test.xlsx");
+		Map<String, County> counties = n1.countyCreator();
+		ArrayList<String> listOfStates = n1.listStates(counties);
+		//ArrayList<String> expectedStates = new ArrayList<String> {"NV", "CA"};
+		assertEquals("[NV, CA]", listOfStates.toString());
+	}
+
+	@Test
+	void testIsDataSheetFalse() throws EncryptedDocumentException, IOException {
+		WorkbookClass n1 = new WorkbookClass("test.xlsx");
+		Boolean expected = false;
+		assertEquals(expected, n1.isDataSheet(n1.myWorkbook.getSheet("NotData")));
+	}
+	
+	@Test
+	void testIsDataSheetTrue() throws EncryptedDocumentException, IOException {
+		WorkbookClass n1 = new WorkbookClass("test.xlsx");
+		Boolean expected = true;
+		assertEquals(expected, n1.isDataSheet(n1.myWorkbook.getSheet("Sheet1")));
+	}
+
+	@Test
+	void testListDataSheets() throws EncryptedDocumentException, IOException {
+		WorkbookClass n1 = new WorkbookClass("test.xlsx");
+		String outList = n1.listDataSheets().get(1).getSheetName();
+		assertEquals("Sheet2", outList);
+	}
 }
