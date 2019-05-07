@@ -20,13 +20,9 @@ public class DeathCode {
 		
 		String year;
 		String causeOfDeath;
-		
-		String stateCode;
-		
+		String stateCode;		
 		String locality;
-		
 		String percentExcessDeath;
-		
 		
 		
 		public DeathCode(String year, String causeOfDeath, String stateCode, String locality,
