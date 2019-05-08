@@ -6,27 +6,17 @@ import java.util.HashMap;
 public class CompareRunner {
 	
 	public static void main(String[] args) throws FileNotFoundException, Exception {
-			
-		
-
-		CorrelationPearson test= new CorrelationPearson("DataDownload.xls");
-		
+		Comparison test= new Comparison("DataDownload.xls");
 		String variable1="PCT_OBESE_ADULTS08";
 		String variable2="PCT_DIABETES_ADULTS08";
 		
-		
-		//Extract Map for one variable
-		
-			//	System.out.println(test.ctr.stateValuesMapForVariable(variable1));
-	
-		
 		//calculate Correlation Pearson between two variables in FoodEnviroment Data
-		System.out.println("Correlation Pearson between " + variable1 +" and "+ variable2 +" : ");
+		System.out.println("Correlation Pearson between " + test.variableNames.get(variable1)+" and "+ test.variableNames.get(variable2) +" : ");
 		System.out.println(test.calculatePearson("PCT_OBESE_ADULTS08", "PCT_DIABETES_ADULTS08"));
 	
 		//Extract common State in Top10 states from  two variables in FoodEnviroment Data
 		System.out.println("\nCommon States for " + variable1 +" and " + variable2 + " : ");
-		System.out.println(test.ctr.commonTopRankedState("PCT_OBESE_ADULTS08", "PCT_DIABETES_ADULTS08"));
+		System.out.println(test.commonTopRankedState("PCT_OBESE_ADULTS08", "PCT_DIABETES_ADULTS08"));
 		
 		
 		//Make comparison between FoodEnviroment Data and Causes_of_Death Data
@@ -44,12 +34,10 @@ public class CompareRunner {
 			
 		//calculate Correlation Pearson between one variable from FoodEnviroment Data and another from Causes_of_Death Data
 		System.out.println("\nCorrelation Pearson between " + variable3 +" and "+ Cause_of_Death +" : ");
-		System.out.println(test.calculatePearson(test.ctr.stateValuesMapForVariable(variable3),dcr.computeAvgDeath(year, Cause_of_Death)));
+		System.out.println(test.calculatePearson(test.stateValuesMapForVariable(variable3),dcr.computeAvgDeath(year, Cause_of_Death)));
 		
 		//Extract common State in Top10 states from  two variables in FoodEnviroment Data
 		System.out.println("\nCommon States for " + variable3 +" and Death of" + Cause_of_Death + " : ");
-		System.out.println(test.ctr.commonTopRankedState(test.ctr.topRankedState(test.ctr.stateValuesMapForVariable(variable3)), test.ctr.topRankedState(dcr.computeAvgDeath(year, Cause_of_Death))));
-		
-		
-		}
+		System.out.println(test.commonTopRankedState(test.topRankedState(test.stateValuesMapForVariable(variable3)), test.topRankedState(dcr.computeAvgDeath(year, Cause_of_Death))));
+	}
 }
