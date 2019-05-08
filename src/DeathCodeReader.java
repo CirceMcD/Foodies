@@ -20,7 +20,7 @@ public class DeathCodeReader {
 	
 	public  DeathCodeReader(String filename) throws FileNotFoundException, Exception {
 
-		 deathCodes = new ArrayList<>();
+		deathCodes = new ArrayList<>();
 
 		File file= new File(filename);
 		// read 'NCHS' file

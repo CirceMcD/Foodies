@@ -16,6 +16,19 @@ public class CountyWorkbook {
 		myWorkbook = WorkbookFactory.create(new File(filePath));
 	}
    
+	public Map<String, String> extractHumanReadableVariableNames(){
+		Sheet sheet1 = myWorkbook.getSheet("Variable List");
+		Map<String, String> variableNamesMaps = new HashMap<String, String>();
+		sheet1.forEach( row -> {
+		    if (row.getRowNum() != 0){
+				String key = row.getCell(4).getStringCellValue();
+				String value = row.getCell(3).getStringCellValue();
+				variableNamesMaps.put(key, value);
+		    }
+		});
+		return variableNamesMaps;
+	}
+	
     // METHOD: Print each cell in an sheet from a workbook object.  
     public void printSheet(Sheet sheet){
         // Create a DataFormatter to format and get each cell's value as String

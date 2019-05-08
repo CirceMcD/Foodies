@@ -9,6 +9,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 public class Comparison {
 	Map<String, County> counties;
 	Map<String, State> states;
+	Map<String, String> variableNames;
 
 	/**
 	 * Constructor with Filename Constructor with no argument
@@ -22,6 +23,7 @@ public class Comparison {
 			CountyWorkbook myworkbook = new CountyWorkbook(filename);
 			counties = myworkbook.countyCreator();
 			states = myworkbook.stateCreator(counties);
+			variableNames = myworkbook.extractHumanReadableVariableNames();
 	}
 
 	/**

@@ -11,7 +11,7 @@ public class CompareRunner {
 		String variable2="PCT_DIABETES_ADULTS08";
 		
 		//calculate Correlation Pearson between two variables in FoodEnviroment Data
-		System.out.println("Correlation Pearson between " + variable1 +" and "+ variable2 +" : ");
+		System.out.println("Correlation Pearson between " + test.variableNames.get(variable1)+" and "+ test.variableNames.get(variable2) +" : ");
 		System.out.println(test.calculatePearson("PCT_OBESE_ADULTS08", "PCT_DIABETES_ADULTS08"));
 	
 		//Extract common State in Top10 states from  two variables in FoodEnviroment Data
