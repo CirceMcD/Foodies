@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WorkbookClass {
+public class CountyWorkbook {
 	Workbook myWorkbook;
 	
-	public WorkbookClass(String filePath) throws EncryptedDocumentException, IOException {
+	public CountyWorkbook(String filePath) throws EncryptedDocumentException, IOException {
 		myWorkbook = WorkbookFactory.create(new File(filePath));
 	}
    

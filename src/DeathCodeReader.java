@@ -50,7 +50,7 @@ public class DeathCodeReader {
 
 				deathCodes.add(deathCode);
 			} catch(Exception e){
-			
+				
 			}
 		}
 	}
@@ -78,15 +78,11 @@ public class DeathCodeReader {
 		Double keyNum = 0.0;
 
 		for (DeathCode index : deathCodes) {
-
 			// Get required columns: year, stateCode, casueOfDeath, locality,
 			// percentExcessDeath
-
 			String stateCode = index.getStateCode();
 			String locality = index.getLocality();
 			String percentExcessDeath = index.getPercentExcessDeath();
-
-
 			if (!stateCode.equals("0") && !stateCode.equals("") && index.getYear().equals(year)
 					&& index.getCauseOfDeath().equals(causeOfDeath) && locality.equals("All")
 					&& !percentExcessDeath.equals("")) {
@@ -100,14 +96,10 @@ public class DeathCodeReader {
 				}
 			}
 		}
-		
 		// sort by key in alphabetically
 		averageDeath = temp_averageDeath.entrySet().stream().sorted(Map.Entry.comparingByKey()).collect(
-							Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-					
+							Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));	
 		return averageDeath;
 	}
-
-	
 	
 }
