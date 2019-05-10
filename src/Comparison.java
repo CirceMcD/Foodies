@@ -106,19 +106,6 @@ public class Comparison {
 		return sortedInput;
 	}
 
-	/**
-	 * This method sorts Bottom 10 ranked states in particular variable
-	 * 
-	 * @param inputMap
-	 * @return
-	 */
-	public HashMap<String, Double> bottomRankedState(HashMap<String, Double> inputMap) {
-		// sort by value
-		HashMap<String, Double> sortedInput = new HashMap<>();
-		sortedInput = inputMap.entrySet().stream().sorted(Map.Entry.comparingByValue()).limit(10)
-				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
-		return sortedInput;
-	}
 
 	/**
 	 * This method return commonTopRankedState 
