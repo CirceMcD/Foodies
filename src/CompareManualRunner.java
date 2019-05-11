@@ -1,7 +1,4 @@
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-
-import java.util.HashMap;
 
 public class CompareRunner {
 	
@@ -38,7 +35,7 @@ public class CompareRunner {
 		System.out.println(test.calculatePearson(test.stateValuesMapForVariable(variable3), dcr.computeAvgDeath(year, Cause_of_Death)));
 		
 		//Extract common State in Top10 states from  two variables in FoodEnviroment Data
-		System.out.println("\nCommon States for " + test.variableNames.get(variable3) +" and Death of" + Cause_of_Death + " : ");
+		System.out.println("\nCommon States for " + test.variableNames.get(variable3) +" and Death of " + Cause_of_Death + " : ");
 		System.out.println(test.commonTopRankedState(test.topRankedState(test.stateValuesMapForVariable(variable3)), test.topRankedState(dcr.computeAvgDeath(year, Cause_of_Death))));
 	}
 }

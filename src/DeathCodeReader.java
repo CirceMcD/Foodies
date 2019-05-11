@@ -18,7 +18,31 @@ public class DeathCodeReader {
 	 */
 	ArrayList<DeathCode> deathCodes;
 	
-	public  DeathCodeReader(String filename) throws FileNotFoundException, Exception {
+    public ArrayList<String> listDeathYears(){
+    	ArrayList<String> deathyears = new ArrayList<String>();
+    	deathCodes.forEach(code -> {
+    		String tempYear = code.getYear();
+    		if (!deathyears.contains(tempYear)) {
+    			deathyears.add(tempYear);
+    			}
+    		}
+    	);
+    	return deathyears;
+    }
+
+    public ArrayList<String> listCauseDeath(){
+    	ArrayList<String> causedeath = new ArrayList<String>();
+    	deathCodes.forEach(code -> {
+    		String tempCause = code.getCauseOfDeath();
+    		if (!causedeath.contains(tempCause)) {
+    			causedeath.add(tempCause);
+    			}
+    		}
+    	);
+    	return causedeath;
+    }
+	
+	public DeathCodeReader(String filename) throws FileNotFoundException, Exception {
 
 		deathCodes = new ArrayList<>();
 

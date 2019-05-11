@@ -36,7 +36,6 @@ public class DeathCode {
 		}
 
 
-
 		public String getYear() {
 			return year;
 		}
@@ -47,13 +46,9 @@ public class DeathCode {
 			this.year = year;
 		}
 
-
-
 		public String getCauseOfDeath() {
 			return causeOfDeath;
 		}
-
-
 
 		public void setCauseOfDeath(String causeOfDeath) {
 			this.causeOfDeath = causeOfDeath;
