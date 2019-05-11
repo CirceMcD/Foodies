@@ -4,7 +4,6 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.ss.usermodel.Sheet;
 
 public class Comparison {
 	Map<String, County> counties;
@@ -30,7 +29,7 @@ public class Comparison {
 	 * This method extracts [key: State, value: mean value of input variable Sorted by key]
 	 * (state) in alphabetical order
 	 * 
-	 * @param variable
+	 * @param 
 	 * @return
 	 */
 
