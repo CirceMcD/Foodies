@@ -1,3 +1,4 @@
+// DESCRIPTION: Import USDA data workbook into state and county classes.
 import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.poi.EncryptedDocumentException;
 
@@ -12,13 +13,16 @@ import java.util.Map;
 public class CountyWorkbook {
 	Workbook myWorkbook;
 	
+	//METHOD: Open excel file as Workbook class.
 	public CountyWorkbook(String filePath) throws EncryptedDocumentException, IOException {
 		myWorkbook = WorkbookFactory.create(new File(filePath));
 	}
    
+	//METHOD: Extract human readable variable names from the variable list sheet.
 	public Map<String, String> extractHumanReadableVariableNames(){
 		Sheet sheet1 = myWorkbook.getSheet("Variable List");
 		Map<String, String> variableNamesMaps = new HashMap<String, String>();
+		//For each row, get key(computer readable names consistent in worksheets) and value (human readable names only present in variable list).
 		sheet1.forEach( row -> {
 		    if (row.getRowNum() != 0){
 				String key = row.getCell(4).getStringCellValue();
@@ -90,7 +94,7 @@ public class CountyWorkbook {
      return counties;
     }
     
-    //Method: Aggregates states together 
+    //METHOD: Aggregates states together 
     public Map<String, State> stateCreator(Map<String,County> counties){
     	ArrayList<String> statesNames = listStates(counties);
     	Map<String, State> states = new HashMap<String, State>();
@@ -117,8 +121,10 @@ public class CountyWorkbook {
     	return states;
     }
     
+    //METHOD: Get list of states from county classes.
     public ArrayList<String> listStates(Map<String,County> counties){
     	ArrayList<String> stateNameList = new ArrayList<String>();
+    	// For each county, add state is state not already present.
     	counties.entrySet().stream().forEach(county -> {
     		String tempState = county.getValue().State.toString();
     		if (!stateNameList.contains(tempState)) {
@@ -129,12 +135,15 @@ public class CountyWorkbook {
     	return stateNameList;
     }
 
+    // Determine if sheet is descriptive or holds data. 
+    // Data sheets always start with the same three columns.
     public Boolean isDataSheet(Sheet sheet){
     	return (sheet.getRow(0).getCell(0).getStringCellValue().equals("FIPS") && 
         		sheet.getRow(0).getCell(1).getStringCellValue().equals("State") &&
         		sheet.getRow(0).getCell(2).getStringCellValue().equals("County"));
     }
    
+    //List all data sheets.
     public ArrayList<Sheet> listDataSheets(){
     	ArrayList<Sheet> dataSheets = new ArrayList<>();
     	myWorkbook.forEach( sheet -> {

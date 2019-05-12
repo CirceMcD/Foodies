@@ -1,10 +1,11 @@
+// DESCRIPTION: Example of how to run methods manually.
+
 import java.io.FileNotFoundException;
 
 public class CompareManualRunner {
 	
 	public static void main(String[] args) throws FileNotFoundException, Exception {
 		Comparison test= new Comparison("DataDownload.xls");
-		
 		String variable1="PCT_DIABETES_ADULTS08";
 		String variable2="PCT_DIABETES_ADULTS13";
 		
@@ -28,9 +29,7 @@ public class CompareManualRunner {
 		String variable3="PCT_OBESE_ADULTS08";
 	
 		//Extract Map for 'YEAR' and 'Cause of Death'
-			//	System.out.println(dcr.computeAvgDeath(year, Cause_of_Death));
-			
-		//calculate Correlation Pearson between one variable from FoodEnviroment Data and another from Causes_of_Death Data
+		//Calculate correlation Pearson between one variable from FoodEnviroment Data and another from Causes_of_Death Data
 		System.out.println("\nCorrelation Pearson between " + test.variableNames.get(variable3) +" and "+ Cause_of_Death +" : ");
 		System.out.println(test.calculatePearson(test.stateValuesMapForVariable(variable3), dcr.computeAvgDeath(year, Cause_of_Death)));
 		

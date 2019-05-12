@@ -1,9 +1,7 @@
+// DESCRIPTION: Test of comparison methods.
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.poi.EncryptedDocumentException;
@@ -30,10 +28,8 @@ class ComparisonTest {
 	void testTopRankedState() throws EncryptedDocumentException, IOException {
 		Comparison cpr=new Comparison("comparison_test.xls");
 		Map<String, Double> top_values =cpr.topRankedState(cpr.stateValuesMapForVariable("PCT_DIABETES_ADULTS08"));
-		
 		assertEquals(10, top_values.size());
 		assertEquals(12.98, top_values.get("AL"),0.1);
-		
 	}
 
 
@@ -42,19 +38,14 @@ class ComparisonTest {
 		Comparison cpr=new Comparison("comparison_test.xls");
 		ArrayList<String> common_states=cpr.commonTopRankedState("PCT_DIABETES_ADULTS08","PCT_DIABETES_ADULTS13");
 		assertEquals( "AL", common_states.get(0));
-		
 	}
-
 
 	@Test
 	void testCalculatePearsonStringString() throws EncryptedDocumentException, IOException  {
 		Comparison cpr=new Comparison("comparison_test.xls");
-		
 		double cp=cpr.calculatePearson("PCT_DIABETES_ADULTS08", "PCT_DIABETES_ADULTS08");
 		double cp2=cpr.calculatePearson("PCT_DIABETES_ADULTS08", "PCT_DIABETES_ADULTS13");
-		
 		assertEquals( 1, cp);
 		assertEquals( 0.98, cp2, 0.1);
 	}
-
 }
