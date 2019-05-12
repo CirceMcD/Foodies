@@ -1,11 +1,7 @@
 // Java program to create a combo box and add event handler to it 
 import java.util.Arrays;
-
-import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
-import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
-import org.apache.commons.math3.stat.correlation.Covariance;
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
 
 import javafx.application.Application; 
@@ -22,29 +18,24 @@ public class CompareJavaFXRunner extends Application {
 	
 	public RealMatrix arrayToMatrix(double[] x, double[] y){
 		RealMatrix matrixOut =  new Array2DRowRealMatrix(x.length, 2);
-//		matrixOut.setColumn(0, x);
-//		matrixOut.setColumn(1, y);
 		for (int i = 0; i < x.length; ++i) {
 			matrixOut.setEntry(i, 0, x[i]);
 			matrixOut.setEntry(i, 1, y[i]);
 		}
 		return matrixOut;
 	}
-
+	
 	// Launch the application 
 	public void start(Stage stage) throws Exception 
 	{ 
 		// Set title for the stage 
 		stage.setTitle("Food Data Correlation with Health Outcome Explorer"); 
 
-		// Create a tile pane 
-		//TilePane r = new TilePane(); 
+		// Create a tile pane  
 
 		//Create comparison table.
 		Comparison test= new Comparison("DataDownload.xls");
 		DeathCodeReader dcr=new DeathCodeReader("NCHS_Causes_of_Death.csv");
-		
-		
 		
 		// Get list of food variable names values.
 		String foodVariables[] = test.variableNames.values().toArray(new String[test.variableNames.size()]);
@@ -55,9 +46,17 @@ public class CompareJavaFXRunner extends Application {
 					new ComboBox<String>(FXCollections 
 							.observableArrayList(foodVariables));
 		combo_box_foodVariables.getSelectionModel().selectFirst();
-
-
 		
+		// Get list of state variable names values.
+		String stateNames[] = test.states.keySet().toArray(new String[test.states.size()]);
+		Arrays.sort(stateNames);
+		
+		// Create a combo box 
+		ComboBox<String> combo_box_states = 
+					new ComboBox<String>(FXCollections 
+							.observableArrayList(stateNames));
+		combo_box_states.getSelectionModel().selectFirst();
+
 		// Get list of death years.
 		String deathYears[] = dcr.listDeathYears().toArray(new String[dcr.listDeathYears().size()]);
 		Arrays.sort(deathYears);
@@ -79,17 +78,16 @@ public class CompareJavaFXRunner extends Application {
 		combo_box_deathTypes.getSelectionModel().selectFirst();
 
 		// Label to display the selected menu item 
-		Label select_foodvariable = new Label("Select county variable of interest");
-		select_foodvariable.setAlignment(Pos.CENTER);
-		Label select_deathtype = new Label("Select health related variable of interest");
-		Label select_deathyear = new Label("Select health year of interest"); 
-		Label answer = new Label("Pearson's correlation:\nP Value:\nNumber of States:");
+//		Label select_foodvariable = new Label("Select county variable of interest.");
+//		Label select_stateofinterest = new Label("Select specific state interest to see variable details.");
+//		Label select_deathtype = new Label("Select health related variable of interest.");
+//		Label select_deathyear = new Label("Select health year of interest.");
+//		Label submit_label = new Label("Please submit once selections are made.");
 		
-		answer.setAlignment(Pos.CENTER);
+		Label answer = new Label("Pearson's correlation:\nP Value:\nNumber of States:\nTop States:\nBottom States:\nState details for\n");
 		answer.setStyle("-fx-border-color: #000; -fx-padding: 5px;");
-		
+			
 		// Create action event 
-		//TODO: Handle non-selected box
 		EventHandler<ActionEvent> event = 
 				new EventHandler<ActionEvent>() { 
 			public void handle(ActionEvent e) 
@@ -110,22 +108,32 @@ public class CompareJavaFXRunner extends Application {
 				
 				//display answer
 				answer.setText("Pearson's correlation: "+ correlation.getCorrelationMatrix().getEntry(0, 1)+"\n"+
-								"P Value: " + correlation.getCorrelationPValues().getEntry(0, 1) +"\n"+
-								"Number of States: " + food_variable_value.length);
+								"P Value: " + correlation.getCorrelationPValues().getEntry(0, 1)+"\n"+
+								"Number of States: " + food_variable_value.length+"\n\n"+
+							    "Top States: " + test.topRankedState(test.stateValuesMapForVariable(selectedFoodKey)).keySet().toString()+"\n"+
+							    "Bottom States: " + test.bottomRankedState(test.stateValuesMapForVariable(selectedFoodKey)).keySet().toString()+"\n\n"+
+							    "State ("+combo_box_states.getValue().toString()+") details for " + selectedFoodValue+"\n"+
+								test.stateStringStats(combo_box_states.getValue().toString(), selectedFoodKey));
 			} 
 		}; 
 
-		
 		//Create submit button
 		Button submit = new Button("Submit");
 		
 		submit.setOnAction(event);
 
 		// Create a tile pane 
-		TilePane tile_pane = new TilePane(select_foodvariable, combo_box_foodVariables, select_deathtype, combo_box_deathTypes, select_deathyear, combo_box_deathYears, submit, answer); 
-
+		FlowPane tile_pane = new FlowPane(combo_box_foodVariables,
+										  combo_box_states,
+										  combo_box_deathTypes,
+										  combo_box_deathYears, 
+										  submit, 
+										  answer);
+		tile_pane.setHgap(1);
+		tile_pane.setVgap(1);
+		
 		// Create a scene 
-		Scene scene = new Scene(tile_pane, 500, 750); 
+		Scene scene = new Scene(tile_pane, 1000, 750);
 
 		// Set the scene 
 		stage.setScene(scene); 
