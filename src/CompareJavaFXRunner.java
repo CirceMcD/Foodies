@@ -33,8 +33,8 @@ public class CompareJavaFXRunner extends Application {
 		stage.setTitle("Food Data Correlation with Health Outcome Explorer"); 
 
 		//Create comparison table.
-		Comparison test = new Comparison("DataDownload.xls");
-		DeathCodeReader dcr = new DeathCodeReader("NCHS_Causes_of_Death.csv");
+		Comparison test = new Comparison("data/DataDownload.xls");
+		DeathCodeReader dcr = new DeathCodeReader("data/NCHS_Causes_of_Death.csv");
 		
 		// Get list of food variable names values.
 		String foodVariables[] = test.variableNames.values().toArray(new String[test.variableNames.size()]);

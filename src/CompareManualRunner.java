@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 public class CompareManualRunner {
 	
 	public static void main(String[] args) throws FileNotFoundException, Exception {
-		Comparison test= new Comparison("DataDownload.xls");
+		Comparison test= new Comparison("data/DataDownload.xls");
 		String variable1="PCT_DIABETES_ADULTS08";
 		String variable2="PCT_DIABETES_ADULTS13";
 		
@@ -19,7 +19,7 @@ public class CompareManualRunner {
 		
 		
 		//Make comparison between FoodEnviroment Data and Causes_of_Death Data
-		DeathCodeReader dcr=new DeathCodeReader("NCHS_Causes_of_Death.csv");
+		DeathCodeReader dcr=new DeathCodeReader("data/NCHS_Causes_of_Death.csv");
 		
 				//	1. YEAR ; 2005- 2015
 				//	2. Cause of Death  ; Cancer, Stroke,Unintentional Injury,Chronic Lower Respiratory Disease,Heart Disease
