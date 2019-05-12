@@ -1,3 +1,5 @@
+// DESCRIPTION: Test DeathCodeReader methods.
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.FileNotFoundException;
@@ -9,7 +11,7 @@ class DeathCodeReaderTest {
 
 	@Test
 	void testComputeAvgDeathAL() throws FileNotFoundException, Exception {
-		DeathCodeReader dcr =new DeathCodeReader("death_test.csv");
+		DeathCodeReader dcr = new DeathCodeReader("death_test.csv");
 		Map<String, Double> averages = dcr.computeAvgDeath("2005", "Cancer");
 		Double stateAverage = averages.get("AL");
 		assertEquals(1.24, stateAverage, 0.1);
@@ -17,7 +19,7 @@ class DeathCodeReaderTest {
 	
 	@Test
 	void testComputeAvgDeathCA() throws FileNotFoundException, Exception {
-		DeathCodeReader dcr =new DeathCodeReader("death_test.csv");
+		DeathCodeReader dcr = new DeathCodeReader("death_test.csv");
 		Map<String, Double> averages = dcr.computeAvgDeath("2005", "Cancer");
 		Double stateAverage = averages.get("CA");
 		assertEquals(0.2534, stateAverage, 0.1);

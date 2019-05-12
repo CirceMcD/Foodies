@@ -1,3 +1,4 @@
+// DESCRIPTION: Read in file to the DeathCode class. Compute average deaths by state.
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class DeathCodeReader {
     	return causedeath;
     }
 	
+	@SuppressWarnings("resource")
 	public DeathCodeReader(String filename) throws FileNotFoundException, Exception {
 
 		deathCodes = new ArrayList<>();

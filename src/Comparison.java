@@ -1,3 +1,5 @@
+// DESCRIPTION: Variety of methods of comparing variables with health outcomes.
+
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -96,7 +98,7 @@ public class Comparison {
 	 * @param inputMap
 	 * @return
 	 */
-	public HashMap<String, Double> topRankedState(HashMap<String, Double> inputMap) {
+	public HashMap<String, Double> topRankedState(HashMap<String, Double> inputMap){
 		// sort by value
 		HashMap<String, Double> sortedInput = new HashMap<>();
 		sortedInput = inputMap.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
@@ -112,7 +114,7 @@ public class Comparison {
 	 * @param inputMap
 	 * @return
 	 */
-	public HashMap<String, Double> bottomRankedState(HashMap<String, Double> inputMap) {
+	public HashMap<String, Double> bottomRankedState(HashMap<String, Double> inputMap){
 		// sort by value
 		HashMap<String, Double> sortedInput = new HashMap<>();
 		sortedInput = inputMap.entrySet().stream().sorted(Map.Entry.comparingByValue())
@@ -128,7 +130,7 @@ public class Comparison {
 	 * @param variable2
 	 * @return
 	 */
-	public ArrayList<String> commonTopRankedState(String variable1, String variable2) {
+	public ArrayList<String> commonTopRankedState(String variable1, String variable2){
 		HashMap<String, Double> oneGroup=topRankedState(stateValuesMapForVariable(variable1));
 		HashMap<String, Double> anotherGroup=topRankedState(stateValuesMapForVariable(variable2));
 		// Array top 10 numbered state in one (Health) group and another Group
@@ -147,8 +149,8 @@ public class Comparison {
 	 * @param anotherGroup
 	 * @return
 	 */
-	public ArrayList <String> commonTopRankedState (HashMap<String, Double> one, HashMap<String, Double> another) {
-		ArrayList<String> commonState1= new ArrayList<>();
+	public ArrayList <String> commonTopRankedState (HashMap<String, Double> one, HashMap<String, Double> another){
+		ArrayList<String> commonState1 = new ArrayList<>();
 		for (String key: one.keySet()) {
 			if(another.keySet().contains(key)){
 				commonState1.add(key);
@@ -157,9 +159,9 @@ public class Comparison {
 		return commonState1;
 	}
 	
-	public double calculatePearson(double[] values1, double[] values2) {
-		double cor=0;
-		if(values1.length==values2.length) {
+	public double calculatePearson(double[] values1, double[] values2){
+		double cor = 0;
+		if(values1.length == values2.length) {
 			PearsonsCorrelation pCorrelation=new PearsonsCorrelation();
 			cor=pCorrelation.correlation(values1, values2);
 		} else {
@@ -168,19 +170,19 @@ public class Comparison {
 		return cor;
 	}
 
-	public double calculatePearson(String variable1, String variable2) {
+	public double calculatePearson(String variable1, String variable2){
 		double[] values1 = getValuesArrayforVariable(variable1);
 		double[] values2 = getValuesArrayforVariable(variable2);
 		return calculatePearson(values1, values2);
 	}
 	
-	public double calculatePearson(HashMap<String, Double> one, HashMap<String, Double> another) {
+	public double calculatePearson(HashMap<String, Double> one, HashMap<String, Double> another){
 		double [] values1 = getValuesArrayforVariable(one);
 		double [] values2 = getValuesArrayforVariable(another);
 		return calculatePearson(values1, values2);
 	}
 	
-	public String stateStringStats(String statekey, String variablekey) {
+	public String stateStringStats(String statekey, String variablekey){
 		DescriptiveStatistics workingstats = states.get(statekey).stats.get(variablekey);
 		String out;
 		out = "Number of Counties: " + String.valueOf(workingstats.getN()) + "\n"+
