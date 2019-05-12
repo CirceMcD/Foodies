@@ -3,6 +3,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.apache.commons.math3.stat.correlation.PearsonsCorrelation;
+import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.apache.poi.EncryptedDocumentException;
 
 public class Comparison {
@@ -105,6 +106,21 @@ public class Comparison {
 		return sortedInput;
 	}
 
+	/**
+	 * This method sorts bottom 10 ranked states in particular variable
+	 * 
+	 * @param inputMap
+	 * @return
+	 */
+	public HashMap<String, Double> bottomRankedState(HashMap<String, Double> inputMap) {
+		// sort by value
+		HashMap<String, Double> sortedInput = new HashMap<>();
+		sortedInput = inputMap.entrySet().stream().sorted(Map.Entry.comparingByValue())
+					.limit(10)
+					.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+		return sortedInput;
+	}
 
 	/**
 	 * This method return commonTopRankedState 
@@ -162,5 +178,16 @@ public class Comparison {
 		double [] values1 = getValuesArrayforVariable(one);
 		double [] values2 = getValuesArrayforVariable(another);
 		return calculatePearson(values1, values2);
+	}
+	
+	public String stateStringStats(String statekey, String variablekey) {
+		DescriptiveStatistics workingstats = states.get(statekey).stats.get(variablekey);
+		String out;
+		out = "Number of Counties: " + String.valueOf(workingstats.getN()) + "\n"+
+			  "Maximum: " + String.valueOf(workingstats.getMax()) + "\n"+
+			  "Minimum: " + String.valueOf(workingstats.getMin()) + "\n"+
+			  "Average: " + String.valueOf(workingstats.getMean()) + "\n"+
+			  "Standard Deviation: " + String.valueOf(workingstats.getStandardDeviation());
+	 return out;	
 	}
 }

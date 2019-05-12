@@ -1,6 +1,6 @@
 import java.io.FileNotFoundException;
 
-public class CompareRunner {
+public class CompareManualRunner {
 	
 	public static void main(String[] args) throws FileNotFoundException, Exception {
 		Comparison test= new Comparison("DataDownload.xls");
